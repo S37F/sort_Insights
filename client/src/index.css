@@ -114,27 +114,27 @@
   }
   
   .sorting-bar-default {
-    background: linear-gradient(to top, var(--bar-default), hsl(from var(--bar-default) h s calc(l + 5%)));
+    background: linear-gradient(to top, #3b82f6, #60a5fa);
   }
   
   .sorting-bar-comparing {
-    background: linear-gradient(to top, var(--bar-comparing), hsl(from var(--bar-comparing) h s calc(l + 5%)));
+    background: linear-gradient(to top, #ef4444, #f87171);
     transform: scale(1.05);
   }
   
   .sorting-bar-swapping {
-    background: linear-gradient(to top, var(--bar-swapping), hsl(from var(--bar-swapping) h s calc(l + 5%)));
+    background: linear-gradient(to top, #f59e0b, #fbbf24);
     transform: scale(1.1);
   }
   
   .sorting-bar-sorted {
-    background: linear-gradient(to top, var(--bar-sorted), hsl(from var(--bar-sorted) h s calc(l + 5%)));
+    background: linear-gradient(to top, #10b981, #34d399);
   }
   
   .sorting-bar-pivot {
-    background: linear-gradient(to top, var(--bar-pivot), hsl(from var(--bar-pivot) h s calc(l + 5%)));
+    background: linear-gradient(to top, #ec4899, #f472b6);
     transform: scale(1.05);
-    box-shadow: 0 0 10px hsl(from var(--bar-pivot) h s l / 0.5);
+    box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
   }
 }
 
