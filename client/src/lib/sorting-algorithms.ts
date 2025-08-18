@@ -34,14 +34,14 @@ export class SortingAlgorithms {
     let arrayAccess = 0;
     const n = array.length;
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Initial array"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Initial array"));
 
     for (let i = 0; i < n - 1; i++) {
       for (let j = 0; j < n - i - 1; j++) {
         comparisons++;
         arrayAccess += 2;
         
-        steps.push(this.recordStep(array, [j, j + 1], undefined, undefined, [], 
+        steps.push(SortingAlgorithms.recordStep(array, [j, j + 1], undefined, undefined, [], 
           `Comparing elements at positions ${j} and ${j + 1}`));
 
         if (array[j] > array[j + 1]) {
@@ -49,17 +49,17 @@ export class SortingAlgorithms {
           swaps++;
           arrayAccess += 2;
           
-          steps.push(this.recordStep(array, [], [j, j + 1], undefined, [], 
+          steps.push(SortingAlgorithms.recordStep(array, [], [j, j + 1], undefined, [], 
             `Swapped elements at positions ${j} and ${j + 1}`));
         }
       }
       
-      steps.push(this.recordStep(array, [], undefined, undefined, 
+      steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
         Array.from({ length: i + 1 }, (_, idx) => n - 1 - idx), 
         `Element at position ${n - 1 - i} is now sorted`));
     }
 
-    steps.push(this.recordStep(array, [], undefined, undefined, 
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
       Array.from({ length: n }, (_, i) => i), "Array is fully sorted"));
 
     return { steps, comparisons, swaps, arrayAccess };
@@ -73,7 +73,7 @@ export class SortingAlgorithms {
     let arrayAccess = 0;
     const n = array.length;
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Initial array"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Initial array"));
 
     for (let i = 0; i < n - 1; i++) {
       let minIdx = i;
@@ -83,7 +83,7 @@ export class SortingAlgorithms {
         comparisons++;
         arrayAccess += 2;
         
-        steps.push(this.recordStep(array, [minIdx, j], undefined, undefined, 
+        steps.push(SortingAlgorithms.recordStep(array, [minIdx, j], undefined, undefined, 
           Array.from({ length: i }, (_, idx) => idx), 
           `Comparing element at position ${j} with current minimum at ${minIdx}`));
 
@@ -97,17 +97,17 @@ export class SortingAlgorithms {
         swaps++;
         arrayAccess += 2;
         
-        steps.push(this.recordStep(array, [], [i, minIdx], undefined, 
+        steps.push(SortingAlgorithms.recordStep(array, [], [i, minIdx], undefined, 
           Array.from({ length: i + 1 }, (_, idx) => idx), 
           `Swapped minimum element to position ${i}`));
       } else {
-        steps.push(this.recordStep(array, [], undefined, undefined, 
+        steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
           Array.from({ length: i + 1 }, (_, idx) => idx), 
           `Element at position ${i} is already in correct position`));
       }
     }
 
-    steps.push(this.recordStep(array, [], undefined, undefined, 
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
       Array.from({ length: n }, (_, i) => i), "Array is fully sorted"));
 
     return { steps, comparisons, swaps, arrayAccess };
@@ -121,14 +121,14 @@ export class SortingAlgorithms {
     let arrayAccess = 0;
     const n = array.length;
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [0], "Initial array - first element is sorted"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [0], "Initial array - first element is sorted"));
 
     for (let i = 1; i < n; i++) {
       const key = array[i];
       let j = i - 1;
       arrayAccess++;
 
-      steps.push(this.recordStep(array, [i], undefined, undefined, 
+      steps.push(SortingAlgorithms.recordStep(array, [i], undefined, undefined, 
         Array.from({ length: i }, (_, idx) => idx), 
         `Inserting element ${key} from position ${i}`));
 
@@ -136,7 +136,7 @@ export class SortingAlgorithms {
         comparisons++;
         arrayAccess += 2;
         
-        steps.push(this.recordStep(array, [j, i], undefined, undefined, 
+        steps.push(SortingAlgorithms.recordStep(array, [j, i], undefined, undefined, 
           Array.from({ length: i }, (_, idx) => idx), 
           `Shifting element ${array[j]} to the right`));
 
@@ -153,12 +153,12 @@ export class SortingAlgorithms {
       array[j + 1] = key;
       arrayAccess++;
 
-      steps.push(this.recordStep(array, [], undefined, undefined, 
+      steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
         Array.from({ length: i + 1 }, (_, idx) => idx), 
         `Placed element ${key} at position ${j + 1}`));
     }
 
-    steps.push(this.recordStep(array, [], undefined, undefined, 
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
       Array.from({ length: n }, (_, i) => i), "Array is fully sorted"));
 
     return { steps, comparisons, swaps, arrayAccess };
@@ -171,7 +171,7 @@ export class SortingAlgorithms {
     let swaps = 0;
     let arrayAccess = 0;
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Initial array"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Initial array"));
 
     const mergeSortHelper = (left: number, right: number) => {
       if (left < right) {
@@ -195,7 +195,7 @@ export class SortingAlgorithms {
         comparisons++;
         arrayAccess += 2;
         
-        steps.push(this.recordStep(array, [left + i, mid + 1 + j], undefined, undefined, [], 
+        steps.push(SortingAlgorithms.recordStep(array, [left + i, mid + 1 + j], undefined, undefined, [], 
           `Merging: comparing ${leftArr[i]} and ${rightArr[j]}`));
 
         if (leftArr[i] <= rightArr[j]) {
@@ -223,14 +223,14 @@ export class SortingAlgorithms {
         arrayAccess++;
       }
 
-      steps.push(this.recordStep(array, [], undefined, undefined, 
+      steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
         Array.from({ length: right - left + 1 }, (_, idx) => left + idx), 
         `Merged subarray from ${left} to ${right}`));
     };
 
     mergeSortHelper(0, array.length - 1);
 
-    steps.push(this.recordStep(array, [], undefined, undefined, 
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
       Array.from({ length: array.length }, (_, i) => i), "Array is fully sorted"));
 
     return { steps, comparisons, swaps: 0, arrayAccess }; // Merge sort doesn't do swaps
@@ -243,7 +243,7 @@ export class SortingAlgorithms {
     let swaps = 0;
     let arrayAccess = 0;
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Initial array"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Initial array"));
 
     const quickSortHelper = (low: number, high: number, sortedIndices: Set<number> = new Set()) => {
       if (low < high) {
@@ -260,14 +260,14 @@ export class SortingAlgorithms {
       arrayAccess++;
       let i = low - 1;
 
-      steps.push(this.recordStep(array, [], undefined, high, Array.from(sortedIndices), 
+      steps.push(SortingAlgorithms.recordStep(array, [], undefined, high, Array.from(sortedIndices), 
         `Selected pivot: ${pivot} at position ${high}`));
 
       for (let j = low; j <= high - 1; j++) {
         comparisons++;
         arrayAccess += 2;
         
-        steps.push(this.recordStep(array, [j], undefined, high, Array.from(sortedIndices), 
+        steps.push(SortingAlgorithms.recordStep(array, [j], undefined, high, Array.from(sortedIndices), 
           `Comparing ${array[j]} with pivot ${pivot}`));
 
         if (array[j] < pivot) {
@@ -277,7 +277,7 @@ export class SortingAlgorithms {
           arrayAccess += 2;
           
           if (i !== j) {
-            steps.push(this.recordStep(array, [], [i, j], high, Array.from(sortedIndices), 
+            steps.push(SortingAlgorithms.recordStep(array, [], [i, j], high, Array.from(sortedIndices), 
               `Swapped ${array[i]} and ${array[j]}`));
           }
         }
@@ -287,7 +287,7 @@ export class SortingAlgorithms {
       swaps++;
       arrayAccess += 2;
       
-      steps.push(this.recordStep(array, [], [i + 1, high], undefined, Array.from(sortedIndices), 
+      steps.push(SortingAlgorithms.recordStep(array, [], [i + 1, high], undefined, Array.from(sortedIndices), 
         `Placed pivot ${pivot} at its correct position ${i + 1}`));
 
       return i + 1;
@@ -295,7 +295,7 @@ export class SortingAlgorithms {
 
     quickSortHelper(0, array.length - 1);
 
-    steps.push(this.recordStep(array, [], undefined, undefined, 
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
       Array.from({ length: array.length }, (_, i) => i), "Array is fully sorted"));
 
     return { steps, comparisons, swaps, arrayAccess };
@@ -309,7 +309,7 @@ export class SortingAlgorithms {
     let arrayAccess = 0;
     const n = array.length;
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Initial array"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Initial array"));
 
     const heapify = (n: number, i: number, sortedIndices: number[] = []) => {
       let largest = i;
@@ -320,7 +320,7 @@ export class SortingAlgorithms {
         comparisons++;
         arrayAccess += 2;
         
-        steps.push(this.recordStep(array, [largest, left], undefined, undefined, sortedIndices, 
+        steps.push(SortingAlgorithms.recordStep(array, [largest, left], undefined, undefined, sortedIndices, 
           `Comparing parent ${array[largest]} with left child ${array[left]}`));
 
         if (array[left] > array[largest]) {
@@ -332,7 +332,7 @@ export class SortingAlgorithms {
         comparisons++;
         arrayAccess += 2;
         
-        steps.push(this.recordStep(array, [largest, right], undefined, undefined, sortedIndices, 
+        steps.push(SortingAlgorithms.recordStep(array, [largest, right], undefined, undefined, sortedIndices, 
           `Comparing ${array[largest]} with right child ${array[right]}`));
 
         if (array[right] > array[largest]) {
@@ -345,7 +345,7 @@ export class SortingAlgorithms {
         swaps++;
         arrayAccess += 2;
         
-        steps.push(this.recordStep(array, [], [i, largest], undefined, sortedIndices, 
+        steps.push(SortingAlgorithms.recordStep(array, [], [i, largest], undefined, sortedIndices, 
           `Swapped ${array[i]} and ${array[largest]} to maintain heap property`));
 
         heapify(n, largest, sortedIndices);
@@ -357,7 +357,7 @@ export class SortingAlgorithms {
       heapify(n, i);
     }
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Built max heap"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Built max heap"));
 
     // Extract elements from heap
     for (let i = n - 1; i > 0; i--) {
@@ -366,13 +366,13 @@ export class SortingAlgorithms {
       arrayAccess += 2;
       
       const sortedIndices = Array.from({ length: n - i }, (_, idx) => n - 1 - idx);
-      steps.push(this.recordStep(array, [], [0, i], undefined, sortedIndices, 
+      steps.push(SortingAlgorithms.recordStep(array, [], [0, i], undefined, sortedIndices, 
         `Moved maximum element ${array[i]} to sorted position`));
 
       heapify(i, 0, sortedIndices);
     }
 
-    steps.push(this.recordStep(array, [], undefined, undefined, 
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
       Array.from({ length: n }, (_, i) => i), "Array is fully sorted"));
 
     return { steps, comparisons, swaps, arrayAccess };
@@ -385,7 +385,7 @@ export class SortingAlgorithms {
     let swaps = 0; // Not really swaps, but array assignments
     let arrayAccess = 0;
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Initial array"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Initial array"));
 
     const max = Math.max(...array);
     const min = Math.min(...array);
@@ -402,7 +402,7 @@ export class SortingAlgorithms {
       arrayAccess++;
     }
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Counted occurrences of each element"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Counted occurrences of each element"));
 
     // Build cumulative count
     for (let i = 1; i < range; i++) {
@@ -423,7 +423,7 @@ export class SortingAlgorithms {
       arrayAccess++;
     }
 
-    steps.push(this.recordStep(array, [], undefined, undefined, 
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
       Array.from({ length: array.length }, (_, i) => i), "Array is fully sorted"));
 
     return { steps, comparisons, swaps, arrayAccess };
@@ -436,14 +436,14 @@ export class SortingAlgorithms {
     let swaps = 0;
     let arrayAccess = 0;
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Initial array"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Initial array"));
 
     const max = Math.max(...array);
     arrayAccess += array.length;
 
     for (let exp = 1; Math.floor(max / exp) > 0; exp *= 10) {
       countingSortByDigit(exp);
-      steps.push(this.recordStep(array, [], undefined, undefined, [], 
+      steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], 
         `Sorted by digit at position ${Math.log10(exp)}`));
     }
 
@@ -473,7 +473,7 @@ export class SortingAlgorithms {
       }
     }
 
-    steps.push(this.recordStep(array, [], undefined, undefined, 
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
       Array.from({ length: array.length }, (_, i) => i), "Array is fully sorted"));
 
     return { steps, comparisons, swaps, arrayAccess };
@@ -487,7 +487,7 @@ export class SortingAlgorithms {
     let arrayAccess = 0;
     const n = array.length;
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Initial array"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Initial array"));
 
     // Normalize to 0-1 range for bucket sort
     const max = Math.max(...array);
@@ -504,7 +504,7 @@ export class SortingAlgorithms {
       arrayAccess++;
     }
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Distributed elements into buckets"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Distributed elements into buckets"));
 
     // Sort individual buckets and concatenate
     let index = 0;
@@ -523,7 +523,7 @@ export class SortingAlgorithms {
       }
     }
 
-    steps.push(this.recordStep(array, [], undefined, undefined, 
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
       Array.from({ length: array.length }, (_, i) => i), "Array is fully sorted"));
 
     return { steps, comparisons, swaps, arrayAccess };
@@ -537,10 +537,10 @@ export class SortingAlgorithms {
     let arrayAccess = 0;
     const n = array.length;
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Initial array"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Initial array"));
 
     for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
-      steps.push(this.recordStep(array, [], undefined, undefined, [], 
+      steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], 
         `Starting gap sequence with gap = ${gap}`));
 
       for (let i = gap; i < n; i++) {
@@ -552,7 +552,7 @@ export class SortingAlgorithms {
           comparisons++;
           arrayAccess += 2;
           
-          steps.push(this.recordStep(array, [j, j - gap], undefined, undefined, [], 
+          steps.push(SortingAlgorithms.recordStep(array, [j, j - gap], undefined, undefined, [], 
             `Comparing elements ${array[j]} and ${array[j - gap]} with gap ${gap}`));
 
           if (array[j - gap] > temp) {
@@ -569,16 +569,16 @@ export class SortingAlgorithms {
         arrayAccess++;
 
         if (j !== i) {
-          steps.push(this.recordStep(array, [], [j, i], undefined, [], 
+          steps.push(SortingAlgorithms.recordStep(array, [], [j, i], undefined, [], 
             `Placed element ${temp} at position ${j}`));
         }
       }
 
-      steps.push(this.recordStep(array, [], undefined, undefined, [], 
+      steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], 
         `Completed gap sequence with gap = ${gap}`));
     }
 
-    steps.push(this.recordStep(array, [], undefined, undefined, 
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
       Array.from({ length: n }, (_, i) => i), "Array is fully sorted"));
 
     return { steps, comparisons, swaps, arrayAccess };
@@ -592,7 +592,7 @@ export class SortingAlgorithms {
     let arrayAccess = 0;
     let iterations = 0;
 
-    steps.push(this.recordStep(array, [], undefined, undefined, [], "Initial array"));
+    steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], "Initial array"));
 
     const isSorted = (): boolean => {
       for (let i = 0; i < array.length - 1; i++) {
@@ -618,18 +618,18 @@ export class SortingAlgorithms {
       shuffle();
       iterations++;
       
-      steps.push(this.recordStep(array, [], undefined, undefined, [], 
+      steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], 
         `Random shuffle attempt #${iterations}`));
 
       if (iterations >= maxIterations) {
-        steps.push(this.recordStep(array, [], undefined, undefined, [], 
+        steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, [], 
           `Stopped after ${maxIterations} attempts (for demo purposes)`));
         break;
       }
     }
 
     if (isSorted()) {
-      steps.push(this.recordStep(array, [], undefined, undefined, 
+      steps.push(SortingAlgorithms.recordStep(array, [], undefined, undefined, 
         Array.from({ length: array.length }, (_, i) => i), 
         `Array is sorted after ${iterations} random shuffles!`));
     }
