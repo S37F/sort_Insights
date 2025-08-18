@@ -19,6 +19,8 @@ export default function Home() {
   const [speed, setSpeed] = useState(5);
   const [isComparisonMode, setIsComparisonMode] = useState(false);
   const [showGlobalModal, setShowGlobalModal] = useState(false);
+  const [comparisonAlgorithmA, setComparisonAlgorithmA] = useState('bubble');
+  const [comparisonAlgorithmB, setComparisonAlgorithmB] = useState('merge');
 
   const handleAlgorithmChange = (algorithm: string) => {
     if (!sortingState.isRunning) {
