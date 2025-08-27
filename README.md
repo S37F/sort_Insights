@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Sorting Algorithm Visualizer
 
 An interactive web application to learn, visualize, and compare different sorting algorithms.
@@ -97,3 +98,7 @@ Pull requests are welcome! If you find a bug or want a new feature, feel free to
 📜 License
 
 This project is licensed under the MIT License – free to use and modify.
+=======
+# sort_Insights
+This web-app performs different types of sorting techniques and shows the visuals effects .
+>>>>>>> 5562d184fc5e4f871c2a8454633482b3669ffaed
